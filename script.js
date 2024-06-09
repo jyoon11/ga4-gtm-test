@@ -1,3 +1,3 @@
 function gotoSecondPage() {
-  window.location.href = '/second.html';
+  window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/second.html';
 }
