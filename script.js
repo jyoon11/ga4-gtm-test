@@ -2,10 +2,12 @@ function gotoSecondPage() {
   window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/second.html';
 }
 
-function trackOne() {
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+function goback() {
+  window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/index.html';
+}
 
-  gtag('config', 'G-ZPDGYKBSC6');
+function trackViewStoreList() {
+  if (window.gtag) {
+    window.gtag('event', 'view_store_list', {});
+  }
 }
