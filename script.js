@@ -8,6 +8,10 @@ function goback() {
 
 function trackViewStoreList() {
   if (window.gtag) {
+
+    gtag('get', 'G-ZPDGYKBSC6', 'client_id', (clientID) => {
+      console.log('client id = ', clientID);
+    });
     window.gtag('event', 'view_store_list', {});
   }
 }
