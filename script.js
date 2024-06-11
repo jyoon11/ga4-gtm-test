@@ -1,10 +1,8 @@
 function loadGtag() {
-  // gTag Main script
   let gTagScript = document.createElement('script');
   gTagScript.setAttribute('type', 'text/javascript');
   gTagScript.src = `https://www.googletagmanager.com/gtag/js?id=G-ZPDGYKBSC6&l=dataLayer`;
 
-  // gTag init
   let gTagInitScript = document.createElement('script');
   gTagInitScript.setAttribute('type', 'text/javascript');
   gTagInitScript.text = `window.dataLayer = window.dataLayer || [];
@@ -26,18 +24,18 @@ function gotoSecondPage() {
   window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/second.html';
 }
 
-function gotoIndexPage() {
-  window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/index.html';
+function gotoMainPage() {
+  window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/main.html';
   // window.history.go(-1);
 }
 
-function trackViewIndexPage() {
+function trackViewMainPage() {
   if (window.gtag) {
 
     gtag('get', 'G-ZPDGYKBSC6', 'client_id', (clientID) => {
       console.log('client id = ', clientID);
     });
-    window.gtag('event', 'view_index_page', {});
+    window.gtag('event', 'view_main_page', {});
   }
 }
 
@@ -51,9 +49,9 @@ function trackViewSecondPage() {
   }
 }
 
-function pushSelectIndex() {
+function pushSelectMain() {
   if (window.dataLayer) {
-    window.dataLayer.push({event: 'SelectIndex'});
+    window.dataLayer.push({event: 'SelectMain'});
   }
 }
 
