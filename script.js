@@ -7,10 +7,10 @@ function loadGtag() {
   // gTag init
   let gTagInitScript = document.createElement('script');
   gTagInitScript.setAttribute('type', 'text/javascript');
-  gTagInitScript.text = `window.${dataLayerName} = window.${dataLayerName} || [];
-    function gtag(){${dataLayerName}.push(arguments);}
+  gTagInitScript.text = `window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', '${gtagId}');
+    gtag('config', 'G-ZPDGYKBSC6');
     gtag('set', {
     'user_properties': {
     'lbs_on': 'no',
