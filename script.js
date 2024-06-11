@@ -15,3 +15,9 @@ function trackViewStoreList() {
     window.gtag('event', 'view_store_list', {});
   }
 }
+
+function pushSelectStore() {
+  if (window.dataLayer) {
+    window.dataLayer.push({event: 'SelectStore'});
+  }
+}
