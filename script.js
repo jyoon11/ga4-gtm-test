@@ -1,3 +1,27 @@
+function loadGtag() {
+  // gTag Main script
+  let gTagScript = document.createElement('script');
+  gTagScript.setAttribute('type', 'text/javascript');
+  gTagScript.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}${customDataLayerAsParamString}`;
+
+  // gTag init
+  let gTagInitScript = document.createElement('script');
+  gTagInitScript.setAttribute('type', 'text/javascript');
+  gTagInitScript.text = `window.${dataLayerName} = window.${dataLayerName} || [];
+    function gtag(){${dataLayerName}.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${gtagId}');
+    gtag('set', {
+    'user_properties': {
+    'lbs_on': 'no',
+    'customer_type': 'Guest'
+    }
+  });`;
+
+  document.head.appendChild(gTagScript);
+  document.head.appendChild(gTagInitScript);
+}
+
 function gotoSecondPage() {
   window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/second.html';
 }
