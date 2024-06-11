@@ -19,8 +19,10 @@
 body {
     margin: 0;
     overscroll-behavior: contain;
+    padding: 2rem;
 }
 
 section div {
   margin-bottom: 1em;
+  font-size: 2em;
 }
