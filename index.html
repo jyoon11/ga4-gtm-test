@@ -30,7 +30,14 @@
     <main>
         <h1>Welcome to My Website</h1>  
     </main>
-    <button onclick="gotoSecondPage()">go to the next page</button>
-    <button onclick="trackViewStoreList()">fire ga4 event (view_store_list)</button>
+    <div>
+      <button onclick="gotoSecondPage()">go to the next page</button>
+    </div>
+    <div>
+      <button onclick="trackViewStoreList()">fire ga4 event (view_store_list)</button>
+    </div>
+    <div>
+      <button onclick="pushSelectStore()">push event (SelectStore) to dataLayer</button>
+    </div>
   </body>
 </html>
