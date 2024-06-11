@@ -1,7 +1,6 @@
 function gotoSecondPage() {
   // window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/second.html';
-  const url = new URL('/ga4-gtm-test/second.html');
-  window.history.pushState({}, '', url);
+  window.history.pushState({}, '', '/ga4-gtm-test/second.html');
 }
 
 function goback() {
