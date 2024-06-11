@@ -1,9 +1,11 @@
 function gotoSecondPage() {
-  window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/second.html';
+  // window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/second.html';
+  window.history.pushState({}, '', '/second.html');
 }
 
 function goback() {
-  window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/index.html';
+  // window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/index.html';
+  window.history.back();
 }
 
 function trackViewStoreList() {
