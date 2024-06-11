@@ -24,5 +24,8 @@ body {
 
 section div {
   margin-bottom: 1em;
+}
+
+section div button {
   font-size: 2em;
 }
