@@ -2,7 +2,7 @@ function loadGtag() {
   // gTag Main script
   let gTagScript = document.createElement('script');
   gTagScript.setAttribute('type', 'text/javascript');
-  gTagScript.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}${customDataLayerAsParamString}`;
+  gTagScript.src = `https://www.googletagmanager.com/gtag/js?id=G-ZPDGYKBSC6&l=dataLayer`;
 
   // gTag init
   let gTagInitScript = document.createElement('script');
