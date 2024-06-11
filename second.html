@@ -29,6 +29,16 @@
     <main>
         <h1>GA4 GTM Second Page</h1>
     </main>
-    <button onclick="gotoIndexPage()">Go to index page</button>
+    <section>
+      <div>
+        <button onclick="gotoIndexPage()">Go to index page</button>
+      </div>
+      <div>
+        <button onclick="trackViewSecondPage()">Fire GA4 event (view_second_page)</button>
+      </div>
+      <div>
+        <button onclick="pushSelectSecond()">Push event (SelectSecond) to dataLayer</button>
+      </div>
+    </section>
   </body>
 </html>

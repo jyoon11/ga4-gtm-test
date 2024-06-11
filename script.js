@@ -31,18 +31,34 @@ function gotoIndexPage() {
   // window.history.go(-1);
 }
 
-function trackViewStoreList() {
+function trackViewIndexPage() {
   if (window.gtag) {
 
     gtag('get', 'G-ZPDGYKBSC6', 'client_id', (clientID) => {
       console.log('client id = ', clientID);
     });
-    window.gtag('event', 'view_store_list', {});
+    window.gtag('event', 'view_index_page', {});
   }
 }
 
-function pushSelectStore() {
+function trackViewSecondPage() {
+  if (window.gtag) {
+
+    gtag('get', 'G-ZPDGYKBSC6', 'client_id', (clientID) => {
+      console.log('client id = ', clientID);
+    });
+    window.gtag('event', 'view_second_page', {});
+  }
+}
+
+function pushSelectIndex() {
   if (window.dataLayer) {
-    window.dataLayer.push({event: 'SelectStore'});
+    window.dataLayer.push({event: 'SelectIndex'});
+  }
+}
+
+function pushSelectSecond() {
+  if (window.dataLayer) {
+    window.dataLayer.push({event: 'SelectSecond'});
   }
 }
