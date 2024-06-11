@@ -24,18 +24,18 @@ function gotoSecondPage() {
   window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/second.html';
 }
 
-function gotoMainPage() {
-  window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/main.html';
+function gotoHomePage() {
+  window.location.href = 'https://jyoon11.github.io/ga4-gtm-test/home.html';
   // window.history.go(-1);
 }
 
-function trackViewMainPage() {
+function trackViewHomePage() {
   if (window.gtag) {
 
     gtag('get', 'G-ZPDGYKBSC6', 'client_id', (clientID) => {
       console.log('client id = ', clientID);
     });
-    window.gtag('event', 'view_main_page', {});
+    window.gtag('event', 'view_home_page', {});
   }
 }
 
@@ -49,9 +49,9 @@ function trackViewSecondPage() {
   }
 }
 
-function pushSelectMain() {
+function pushSelectHome() {
   if (window.dataLayer) {
-    window.dataLayer.push({event: 'SelectMain'});
+    window.dataLayer.push({event: 'SelectHome'});
   }
 }
 
