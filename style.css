@@ -22,8 +22,16 @@ body {
     padding: 2rem;
 }
 
+main {
+  margin-bottom: 4em;
+}
+
+main h1 {
+  font-size: 3em;
+}
+
 section div {
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 section div button {
