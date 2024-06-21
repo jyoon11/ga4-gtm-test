@@ -14,6 +14,28 @@ function loadGtag() {
     'lbs_on': 'no',
     'customer_type': 'Guest'
     }
+    // const consentObject = ['functionality','advertising','performance'];
+    const consentObject = [];
+
+    const consentModeStates = {
+            ad_storage: consentObject.indexOf("advertising") > -1 ? 'denied' : 'granted',
+            ad_user_data: consentObject.indexOf("advertising") > -1 ? 'denied' : 'granted',
+            ad_personalization: consentObject.indexOf("advertising") > -1 ? 'denied' : 'granted',
+            analytics_storage: consentObject.indexOf('performance') > -1 ? 'denied' : 'granted',
+            functionality_storage: consentObject.indexOf('functionality') > -1 ? 'denied' : 'granted',
+            personalization_storage: consentObject.indexOf('functionality') > -1 ? 'denied' : 'granted',
+            security_storage: 'granted',
+        };
+    if (gtag) {
+        gtag('consent', 'update', consentModeStates)
+    } else {
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments)
+        }
+        gtag('consent', 'update', consentModeStates)
+    }
   });`;
 
   document.head.appendChild(gTagScript);
