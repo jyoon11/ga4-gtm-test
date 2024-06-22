@@ -13,7 +13,7 @@ function loadGtag() {
       'user_properties': {
       'lbs_on': 'no',
       'customer_type': 'Guest'
-    });
+    }});
 
     // const consentObject = ['functionality','advertising','performance'];
     const consentObject = [];
