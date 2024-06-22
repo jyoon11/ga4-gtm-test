@@ -15,8 +15,8 @@ function loadGtag() {
       'customer_type': 'Guest'
     }});
 
-    // const consentObject = ['functionality','advertising','performance'];
-    const consentObject = [];
+    const consentObject = ['functionality','advertising','performance'];
+    // const consentObject = [];
 
     const consentModeStates = {
         ad_storage: consentObject.indexOf("advertising") > -1 ? 'denied' : 'granted',
