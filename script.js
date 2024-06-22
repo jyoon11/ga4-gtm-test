@@ -28,6 +28,7 @@ function loadGtag() {
         security_storage: 'granted'
     };
     if (gtag) {
+      console.log('consentModeStates', consentModeStates);
       gtag('consent', 'update', consentModeStates)
     } else {
       window.dataLayer = window.dataLayer || [];
