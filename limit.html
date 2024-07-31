@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+      #thresholdCountText {
+        font-size: 80px;
+      }
+    </style>
+    <script type="text/javascript" src="./script.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="./limit_tes.js?id=G-ZPDGYKBSC6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ZPDGYKBSC6');
+
+      var thresholdCount = 5;
+      function updateThresholdCountText() {
+        document.getElementById('thresholdCountText').innerText = 'Threshold Count: ' + thresholdCount;
+      }
+      function thresholdTest() {
+        window.gtag('event', 'threshold_test1', {});
+
+        thresholdCount--;
+        updateThresholdCountText();
+      }
+
+      updateThresholdCountText();
+    </script>
+  </head>
+  <body>
+    <main>
+        <h1>GA4 GTM Threshold Test Page</h1>
+    </main>
+    <section>
+      <h1 id="thresholdCountText">Threshold Count: 5</h1>
+      <br>
+      <div>
+        <button onclick="thresholdTest()">Fire Threshold event</button>
+      </div>
+    </section>
+  </body>
+</html>
