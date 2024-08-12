@@ -21,10 +21,24 @@
       }
 
       var gtagCallCount = 0;
-      var dataLayerName = createDataLayerName();
+      
+
+      function loadGtagManaully(measurementId, customDataLayerName) {
+        var s = 'script';
+        var f = d.getElementsByTagName(s)[0];
+        var j = d.createElement(s);
+        var i = measurementId;
+        var dl = customDataLayerName !== 'dataLayer' ? '&l=' + customDataLayerName : '';
+        j.async=true;
+        j.src='https://www.googletagmanager.com/gtag/js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      }
 
       
       function setupGoogleAnalytics() {
+        var dataLayerName = createDataLayerName();
+        loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
+
         window[dataLayerName] = window[dataLayerName] || [];
         console.log('dataLayerName : ', dataLayerName);
         window.dataLayer = window[dataLayerName];
@@ -36,6 +50,9 @@
       }
 
       function overrideGtagInitialization() {
+        var dataLayerName = createDataLayerName();
+        loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
+
         const originalGtag = window.gtag;
         window.gtag = function(...args) {
           gtagCallCount++;
@@ -64,7 +81,7 @@
   </head>
   <body>
     <main>
-        <h1>Gtag Is Not Reloaded</h1>
+        <h1>Gtag Is Reloaded</h1>
     </main>
     <section>
       <h1 id="gtagCallCountText">gtagCallCount: 0</h1>
