@@ -25,12 +25,12 @@
         var s = 'script';
         var d = window.document;
         var j = d.createElement(s);
-        var f = d.getElementsByTagName(s)[0];
+        var h = d.getElementsByTagName('head')[0];
         var i = measurementId;
         var dl = customDataLayerName !== 'dataLayer' ? '&l=' + customDataLayerName : '';
         j.async=true;
         j.src='https://www.googletagmanager.com/gtag/js?id='+i+dl;
-        f.parentNode.insertBefore(j,f);
+        h.appendChild(j);
       }
 
       
