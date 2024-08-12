@@ -42,6 +42,7 @@
         console.log('dataLayerName : ', dataLayerName);
         window.dataLayer = window[dataLayerName];
         window.gtag = function() {
+          gtagCallCount++;
           window[dataLayerName].push(arguments);
         };
         gtag('js', new Date());
@@ -55,21 +56,19 @@
         const originalGtag = window.gtag;
         window.gtag = function(...args) {
           gtagCallCount++;
-          if (typeof originalGtag === 'function') {
-            originalGtag.apply(window, args);
-          }
+          // if (typeof originalGtag === 'function') {
+          //   originalGtag.apply(window, args);
+          // }
           window[dataLayerName].push(args);
         }
       }
 
       function fireEvent() {
-
         if (gtagCallCount % 5 === 1) {
           overrideGtagInitialization();
         }
-        if (window.gtag) {
-          window.gtag('event', 'sample_one', {});
-        }
+        
+        window.gtag('event', 'sample_one', {gtagCallCount: gtagCallCount});
 
         document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
       }
@@ -83,7 +82,7 @@
         <h1>Gtag Is Reloaded</h1>
     </main>
     <section>
-      <h1 id="gtagCallCountText">gtagCallCount: 0</h1>
+      <h1 id="gtagCallCountText">gtagCallCount: 1</h1>
       <br>
       <div>
         <button onclick="fireEvent()">Fire Threshold event</button>
