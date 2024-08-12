@@ -18,14 +18,14 @@
         return `dataLayer_${new Date().getTime()}`;
       }
 
-      var gtagCallCount = 0;
+      var gtagCallCount = 1;
       
 
       function loadGtagManaully(measurementId, customDataLayerName) {
         var s = 'script';
         var d = window.document;
-        var f = d.getElementsByTagName(s)[0];
         var j = d.createElement(s);
+        var f = d.getElementsByTagName(s)[0];
         var i = measurementId;
         var dl = customDataLayerName !== 'dataLayer' ? '&l=' + customDataLayerName : '';
         j.async=true;
@@ -64,7 +64,7 @@
 
       function fireEvent() {
 
-        if (gtagCallCount % 5 === 0) {
+        if (gtagCallCount % 5 === 1) {
           overrideGtagInitialization();
         }
         if (window.gtag) {

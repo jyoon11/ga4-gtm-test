@@ -20,7 +20,7 @@
         return `dataLayer_${new Date().getTime()}`;
       }
 
-      var gtagCallCount = 0;
+      var gtagCallCount = 1;
       var dataLayerName = createDataLayerName();
 
       
@@ -67,7 +67,7 @@
         <h1>Gtag Is Not Reloaded</h1>
     </main>
     <section>
-      <h1 id="gtagCallCountText">gtagCallCount: 0</h1>
+      <h1 id="gtagCallCountText">gtagCallCount: 1</h1>
       <br>
       <div>
         <button onclick="fireEvent()">Fire Threshold event</button>
