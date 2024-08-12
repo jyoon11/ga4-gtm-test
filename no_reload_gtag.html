@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+      #thresholdCountText {
+        font-size: 80px;
+      }
+    </style>
+    <script type="text/javascript" src="./script.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="./limit_test.js?id=G-ZPDGYKBSC6"></script>
+    <script>
+
+      function createDataLayerName() {
+        return `dataLayer_${new Date().getTime()}`;
+      }
+
+      var gtagCallCount = 0;
+      var dataLayerName = createDataLayerName();
+
+      
+      function setupGoogleAnalytics() {
+        window[dataLayerName] = window[dataLayerName] || [];
+        console.log('dataLayerName : ', dataLayerName);
+        window.dataLayer = window[dataLayerName];
+        window.gtag = function() {
+          window[dataLayerName].push(arguments);
+        };
+        gtag('js', new Date());
+        gtag('config', 'G-ZPDGYKBSC6');
+      }
+
+      function overrideGtagInitialization() {
+        const originalGtag = window.gtag;
+        window.gtag = function(...args) {
+          gtagCallCount++;
+          if (typeof originalGtag === 'function') {
+            originalGtag.apply(window, args);
+          }
+          window[dataLayerName].push(args);
+        }
+      }
+
+      function fireEvent() {
+
+        if (gtagCallCount % 5 === 0) {
+          overrideGtagInitialization();
+        }
+        if (window.gtag) {
+          window.gtag('event', 'sample_one', {});
+        }
+
+        document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
+      }
+      
+      setupGoogleAnalytics();
+
+    </script>
+  </head>
+  <body>
+    <main>
+        <h1>Gtag Not Reload Page</h1>
+    </main>
+    <section>
+      <h1 id="gtagCallCountText">gtagCallCount: 0</h1>
+      <br>
+      <div>
+        <button onclick="fireEvent()">Fire Threshold event</button>
+      </div>
+    </section>
+  </body>
+</html>
