@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <style>
-      #thresholdCountText {
+      #gtagCallCountText {
         font-size: 80px;
       }
     </style>
@@ -35,7 +35,11 @@
 
       function createGtagIframe() {
         var iframe = document.createElement('iframe');
-        iframe.src="https://jyoon11.github.io/ga4-gtm-test/empty.html"
+        iframe.src="https://jyoon11.github.io/ga4-gtm-test/empty.html";
+        iframe.style.position = 'absolute';
+        iframe.style.border = '0';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
         document.body.appendChild(iframe);
 
         currentIframe = iframe;
@@ -49,19 +53,9 @@
           createGtagIframe();
         }
 
-        // callEvent('event', 'sample_one', {gtagCallCount: gtagCallCount});
-
-        if (currentIframe.contentWindow && currentIframe.contentWindow.gtag) {
+        if (currentIframe && currentIframe.contentWindow && currentIframe.contentWindow.gtag) {
           currentIframe.contentWindow.gtag('event', 'sample_one', {gtagCallCount: gtagCallCount})
         } 
-      }
-
-      function callEvent() {
-        gtagCallCount++;
-        updateGtagCallCountText();
-        // window[currentDataLayerName].push(arguments);
-        // currentIframe.contentWindow[currentDataLayerName].push(arguments);
-        currentIframe.contentWindow.dataLayer.push(arguments);
       }
 
       createGtagIframe();
