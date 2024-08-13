@@ -14,16 +14,15 @@
     </style>
     <script>
 
+      var gtagCallCount = 0;
+
       function createDataLayerName() {
         return `dataLayer_${new Date().getTime()}`;
       }
 
       function updateGtagCallCountText() {
-        document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
+        document.getElementById('gtagCallCountText')?.innerText = 'gtagCallCount: ' + gtagCallCount;
       }
-
-      var gtagCallCount = 0;
-      
 
       function loadGtagManaully(measurementId, customDataLayerName) {
         var s = 'script';
@@ -67,7 +66,7 @@
       }
 
       function fireEvent() {
-        if (gtagCallCount % 5 === 1) {
+        if (gtagCallCount % 5 === 0) {
           overrideGtagInitialization();
         }
         
