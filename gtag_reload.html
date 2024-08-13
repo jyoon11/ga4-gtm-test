@@ -90,7 +90,7 @@
       }
 
       function fireEvent() {
-        if (gtagCallCount % 5 === 0) {
+        if (gtagCallCount % 7 === 0) {
           loadGoogleAnalytics();
         }
 
@@ -99,6 +99,7 @@
 
       function callEvent() {
         gtagCallCount++;
+        updateGtagCallCountText();
         window[currentDataLayerName].push(arguments);
       }
       
