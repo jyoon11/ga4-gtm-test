@@ -81,7 +81,7 @@
 
       function fireEvent() {
         if (gtagCallCount % 5 === 0) {
-          overrideGtagInitialization();
+          loadGoogleAnalytics();
         }
         
         window.gtag('event', 'sample_one', {gtagCallCount: gtagCallCount});
