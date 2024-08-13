@@ -18,7 +18,11 @@
         return `dataLayer_${new Date().getTime()}`;
       }
 
-      var gtagCallCount = 1;
+      function updateGtagCallCountText() {
+        document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
+      }
+
+      var gtagCallCount = 0;
       
 
       function loadGtagManaully(measurementId, customDataLayerName) {
@@ -37,12 +41,12 @@
       function setupGoogleAnalytics() {
         var dataLayerName = createDataLayerName();
         loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
-
         window[dataLayerName] = window[dataLayerName] || [];
+
         console.log('dataLayerName : ', dataLayerName);
-        window.dataLayer = window[dataLayerName];
-        window.gtag = function() {
+        window.gtag = function(...args) {
           gtagCallCount++;
+          updateGtagCallCountText();
           window[dataLayerName].push(arguments);
         };
         gtag('js', new Date());
@@ -52,13 +56,12 @@
       function overrideGtagInitialization() {
         var dataLayerName = createDataLayerName();
         loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
+        window[dataLayerName] = window[dataLayerName] || [];
 
         const originalGtag = window.gtag;
         window.gtag = function(...args) {
           gtagCallCount++;
-          // if (typeof originalGtag === 'function') {
-          //   originalGtag.apply(window, args);
-          // }
+          updateGtagCallCountText();
           window[dataLayerName].push(args);
         }
       }
@@ -69,8 +72,6 @@
         }
         
         window.gtag('event', 'sample_one', {gtagCallCount: gtagCallCount});
-
-        document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
       }
       
       setupGoogleAnalytics();
@@ -82,7 +83,7 @@
         <h1>Gtag Is Reloaded</h1>
     </main>
     <section>
-      <h1 id="gtagCallCountText">gtagCallCount: 1</h1>
+      <h1 id="gtagCallCountText">gtagCallCount: 0</h1>
       <br>
       <div>
         <button onclick="fireEvent()">Fire Threshold event</button>
