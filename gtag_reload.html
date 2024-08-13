@@ -50,7 +50,7 @@
       }
 
       
-      function setupGoogleAnalytics() {
+      function loadGoogleAnalytics() {
         var dataLayerName = createDataLayerName();
         loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
         window[dataLayerName] = window[dataLayerName] || [];
@@ -59,7 +59,7 @@
         window.gtag = function(...args) {
           gtagCallCount++;
           updateGtagCallCountText();
-          window[dataLayerName].push(arguments);
+          window[dataLayerName].push(args);
         };
         gtag('js', new Date());
         gtag('config', 'G-ZPDGYKBSC6');
@@ -70,12 +70,13 @@
         loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
         window[dataLayerName] = window[dataLayerName] || [];
 
-        const originalGtag = window.gtag;
         window.gtag = function(...args) {
           gtagCallCount++;
           updateGtagCallCountText();
           window[dataLayerName].push(args);
         }
+        gtag('js', new Date());
+        gtag('config', 'G-ZPDGYKBSC6');
       }
 
       function fireEvent() {
@@ -86,7 +87,7 @@
         window.gtag('event', 'sample_one', {gtagCallCount: gtagCallCount});
       }
       
-      setupGoogleAnalytics();
+      loadGoogleAnalytics();
 
     </script>
   </body>
