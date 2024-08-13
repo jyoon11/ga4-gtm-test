@@ -93,8 +93,12 @@
         if (gtagCallCount % 5 === 0) {
           loadGoogleAnalytics();
         }
-        
-        window[currentDataLayerName].push({'event', 'sample_one', {gtagCallCount: gtagCallCount}});
+
+        callEvent('event', 'sample_one', {gtagCallCount: gtagCallCount});
+      }
+
+      function callEvent() {
+        window[currentDataLayerName].push(arguments);
       }
       
       loadGoogleAnalytics();
