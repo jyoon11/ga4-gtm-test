@@ -30,6 +30,8 @@
       var gtagCallCount = 0;
       var currentDataLayerName = 'dataLayer';
       var currentGtagName = 'gtag';
+      var currentIframeId;
+      var currentIframe;
 
       function createDataLayerName() {
         return `dataLayer_${new Date().getTime()}`;
@@ -39,11 +41,28 @@
         return `gtag_${new Date().getTime()}`;
       }
 
+      function createIframeId() {
+        return `iframe_${new Date().getTime()}`;
+      }
+
       function updateGtagCallCountText() {
         document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
       }
 
+      function createIframe(id) {
+        var iframe = document.createElement('iframe');
+        iframe.id = id;
+        var html = '<body></body>';
+        iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+        document.body.appendChild(iframe);
+
+        currentIframe = iframe;
+      }
+
       function loadGtagManaully(measurementId, customDataLayerName) {
+
+        currentIframeId = reateIframeId();
+
         var s = 'script';
         var d = window.document;
         var j = d.createElement(s);
@@ -52,7 +71,15 @@
         var dl = customDataLayerName !== 'dataLayer' ? '&l=' + customDataLayerName : '';
         j.async=true;
         j.src='https://www.googletagmanager.com/gtag/js?id='+i+dl;
-        h.appendChild(j);
+        // h.appendChild(j);
+
+
+        var framedoc = currentIframe.contentDocument;
+        if (!framedoc && currentIframe.contentWindow) {
+            framedoc = currentIframe.contentWindow.document;
+        }
+
+        framedoc.body.appendChild(j);
       }
 
       
@@ -61,18 +88,28 @@
         currentGtagName = createGtagName();
         currentDataLayerName = dataLayerName;
         loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
-        window[dataLayerName] = window[dataLayerName] || [];
+        // window[dataLayerName] = window[dataLayerName] || [];
+        currentIframe.contentWindow[dataLayerName] = currentIframe.contentWindow[dataLayerName] || [];
+
 
         console.log('currentDataLayerName : ', dataLayerName);
         console.log('currentGtagName : ', currentGtagName);
 
-        window[currentGtagName] = function() {
+        // window[currentGtagName] = function() {
+        //   gtagCallCount++;
+        //   updateGtagCallCountText();
+        //   window[dataLayerName].push(arguments);
+        // };
+        // window[currentGtagName]('js', new Date());
+        // window[currentGtagName]('config', 'G-ZPDGYKBSC6');
+
+        currentIframe.contentWindow[currentGtagName] = function() {
           gtagCallCount++;
           updateGtagCallCountText();
-          window[dataLayerName].push(arguments);
+          currentIframe.contentWindow[dataLayerName].push(arguments);
         };
-        window[currentGtagName]('js', new Date());
-        window[currentGtagName]('config', 'G-ZPDGYKBSC6');
+        currentIframe.contentWindow[currentGtagName]('js', new Date());
+        currentIframe.contentWindow[currentGtagName]('config', 'G-ZPDGYKBSC6');
       }
 
       function overrideGtagInitialization() {
@@ -100,7 +137,8 @@
       function callEvent() {
         gtagCallCount++;
         updateGtagCallCountText();
-        window[currentDataLayerName].push(arguments);
+        // window[currentDataLayerName].push(arguments);
+        currentIframe.contentWindow[currentDataLayerName].push(arguments);
       }
       
       loadGoogleAnalytics();
