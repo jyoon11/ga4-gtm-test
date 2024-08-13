@@ -139,7 +139,8 @@
         gtagCallCount++;
         updateGtagCallCountText();
         // window[currentDataLayerName].push(arguments);
-        currentIframe.contentWindow[currentDataLayerName].push(arguments);
+        // currentIframe.contentWindow[currentDataLayerName].push(arguments);
+        currentIframe.contentWindow.dataLayer.push(arguments);
       }
       
       loadGoogleAnalytics();
