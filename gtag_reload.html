@@ -94,7 +94,7 @@
           loadGoogleAnalytics();
         }
         
-        window[currentDataLayerName].push('event', 'sample_one', {gtagCallCount: gtagCallCount});
+        window[currentDataLayerName].push({'event', 'sample_one', {gtagCallCount: gtagCallCount}});
       }
       
       loadGoogleAnalytics();
