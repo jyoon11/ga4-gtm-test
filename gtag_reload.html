@@ -98,6 +98,7 @@
       }
 
       function callEvent() {
+        gtagCallCount++;
         window[currentDataLayerName].push(arguments);
       }
       
