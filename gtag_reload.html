@@ -33,6 +33,10 @@
         return `dataLayer_${new Date().getTime()}`;
       }
 
+      function createGtagName() {
+        return `gtag_${new Date().getTime()}`;
+      }
+
       function updateGtagCallCountText() {
         document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
       }
@@ -52,17 +56,20 @@
       
       function loadGoogleAnalytics() {
         var dataLayerName = createDataLayerName();
+        var gtagName = createGtagName();
         loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
         window[dataLayerName] = window[dataLayerName] || [];
 
         console.log('dataLayerName : ', dataLayerName);
-        window.gtag = function() {
+        console.log('gtagName : ', gtagName);
+
+        window[gtagName] = function() {
           gtagCallCount++;
           updateGtagCallCountText();
           window[dataLayerName].push(arguments);
         };
-        window.gtag('js', new Date());
-        window.gtag('config', 'G-ZPDGYKBSC6');
+        window[gtagName]('js', new Date());
+        window[gtagName]('config', 'G-ZPDGYKBSC6');
       }
 
       function overrideGtagInitialization() {
@@ -84,7 +91,7 @@
           loadGoogleAnalytics();
         }
         
-        window.gtag('event', 'sample_one', {gtagCallCount: gtagCallCount});
+        window[gtagName]('event', 'sample_one', {gtagCallCount: gtagCallCount});
       }
       
       loadGoogleAnalytics();
