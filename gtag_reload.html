@@ -53,7 +53,8 @@
         var iframe = document.createElement('iframe');
         iframe.id = id;
         var html = '<body></body>';
-        iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+        // iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+        iframe.src="https://jyoon11.github.io/ga4-gtm-test/empty.html"
         document.body.appendChild(iframe);
 
         currentIframe = iframe;
