@@ -56,13 +56,13 @@
         window[dataLayerName] = window[dataLayerName] || [];
 
         console.log('dataLayerName : ', dataLayerName);
-        window.gtag = function(...args) {
+        window.gtag = function() {
           gtagCallCount++;
           updateGtagCallCountText();
-          window[dataLayerName].push(args);
+          window[dataLayerName].push(arguments);
         };
-        gtag('js', new Date());
-        gtag('config', 'G-ZPDGYKBSC6');
+        window.gtag('js', new Date());
+        window.gtag('config', 'G-ZPDGYKBSC6');
       }
 
       function overrideGtagInitialization() {
