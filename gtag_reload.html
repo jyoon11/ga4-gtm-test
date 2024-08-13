@@ -28,6 +28,7 @@
     <script>
 
       var gtagCallCount = 0;
+      var currentGtagName = 'gtag';
 
       function createDataLayerName() {
         return `dataLayer_${new Date().getTime()}`;
@@ -56,20 +57,20 @@
       
       function loadGoogleAnalytics() {
         var dataLayerName = createDataLayerName();
-        var gtagName = createGtagName();
+        currentGtagName = createGtagName();
         loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
         window[dataLayerName] = window[dataLayerName] || [];
 
         console.log('dataLayerName : ', dataLayerName);
-        console.log('gtagName : ', gtagName);
+        console.log('currentGtagName : ', currentGtagName);
 
-        window[gtagName] = function() {
+        window[currentGtagName] = function() {
           gtagCallCount++;
           updateGtagCallCountText();
           window[dataLayerName].push(arguments);
         };
-        window[gtagName]('js', new Date());
-        window[gtagName]('config', 'G-ZPDGYKBSC6');
+        window[currentGtagName]('js', new Date());
+        window[currentGtagName]('config', 'G-ZPDGYKBSC6');
       }
 
       function overrideGtagInitialization() {
@@ -91,7 +92,7 @@
           loadGoogleAnalytics();
         }
         
-        window[gtagName]('event', 'sample_one', {gtagCallCount: gtagCallCount});
+        window[currentGtagName]('event', 'sample_one', {gtagCallCount: gtagCallCount});
       }
       
       loadGoogleAnalytics();
