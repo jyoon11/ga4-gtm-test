@@ -12,6 +12,19 @@
         font-size: 80px;
       }
     </style>
+  </head>
+  <body>
+    <main>
+        <h1>Gtag Is Reloaded</h1>
+    </main>
+    <section>
+      <h1 id="gtagCallCountText">gtagCallCount: 0</h1>
+      <br>
+      <div>
+        <button onclick="fireEvent()">Fire Threshold event</button>
+      </div>
+    </section>
+
     <script>
 
       var gtagCallCount = 0;
@@ -21,7 +34,7 @@
       }
 
       function updateGtagCallCountText() {
-        document.getElementById('gtagCallCountText')?.innerText = 'gtagCallCount: ' + gtagCallCount;
+        document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
       }
 
       function loadGtagManaully(measurementId, customDataLayerName) {
@@ -76,17 +89,5 @@
       setupGoogleAnalytics();
 
     </script>
-  </head>
-  <body>
-    <main>
-        <h1>Gtag Is Reloaded</h1>
-    </main>
-    <section>
-      <h1 id="gtagCallCountText">gtagCallCount: 0</h1>
-      <br>
-      <div>
-        <button onclick="fireEvent()">Fire Threshold event</button>
-      </div>
-    </section>
   </body>
 </html>
