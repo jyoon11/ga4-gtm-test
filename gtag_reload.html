@@ -15,13 +15,13 @@
   </head>
   <body>
     <main>
-        <h1>Gtag Is Reloaded</h1>
+        <h1>Gtag IFrame</h1>
     </main>
     <section>
       <h1 id="gtagCallCountText">gtagCallCount: 0</h1>
       <br>
       <div>
-        <button onclick="fireEvent()">Fire Threshold event</button>
+        <button onclick="fireEvent()">Fire GA4 event</button>
       </div>
     </section>
 
@@ -35,7 +35,7 @@
 
       function createGtagIframe() {
         var iframe = document.createElement('iframe');
-        iframe.src="https://jyoon11.github.io/ga4-gtm-test/empty.html";
+        iframe.src="https://jyoon11.github.io/ga4-gtm-test/gtag_loader.html";
         iframe.style.position = 'absolute';
         iframe.style.border = '0';
         iframe.style.width = '0';
@@ -54,7 +54,7 @@
         }
 
         if (currentIframe && currentIframe.contentWindow && currentIframe.contentWindow.gtag) {
-          currentIframe.contentWindow.gtag('event', 'sample_one', {gtagCallCount: gtagCallCount})
+          currentIframe.contentWindow.gtag('event', 'gtag_load_event', {gtagCallCount: gtagCallCount})
         } 
       }
 
