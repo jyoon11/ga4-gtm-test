@@ -1,3 +1,32 @@
 <html>
+<head></head>
 <body></body>
+<script type="text/javascript">
+
+	function loadGtagManaully(measurementId) {
+      var s = 'script';
+      var d = window.document;
+      var j = d.createElement(s);
+      var h = d.getElementsByTagName('head')[0];
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+      h.appendChild(j);
+    }
+
+	function loadGtag() {
+
+	  loadGtagManaully('G-ZPDGYKBSC6');
+
+      var dataLayerName = createDataLayerName();
+      window.dataLayer = window. dataLayer || [];
+      function gtag(){
+      	dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-ZPDGYKBSC6');
+    }
+
+    loadGtag();
+
+</script>
 </html>

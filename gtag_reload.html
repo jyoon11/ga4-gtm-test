@@ -52,7 +52,6 @@
       function createIframe(id) {
         var iframe = document.createElement('iframe');
         iframe.id = id;
-        var html = '<body></body>';
         // iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
         iframe.src="https://jyoon11.github.io/ga4-gtm-test/empty.html"
         document.body.appendChild(iframe);
@@ -66,23 +65,22 @@
 
         createIframe(currentIframeId);
 
-        var s = 'script';
-        var d = window.document;
-        var j = d.createElement(s);
-        var h = d.getElementsByTagName('head')[0];
-        var i = measurementId;
-        var dl = customDataLayerName !== 'dataLayer' ? '&l=' + customDataLayerName : '';
-        j.async=true;
-        j.src='https://www.googletagmanager.com/gtag/js?id='+i+dl;
-        // h.appendChild(j);
+        // var s = 'script';
+        // var d = window.document;
+        // var j = d.createElement(s);
+        // var h = d.getElementsByTagName('head')[0];
+        // var i = measurementId;
+        // j.async=true;
+        // j.src='https://www.googletagmanager.com/gtag/js?id='+measurementId;
+        // // h.appendChild(j);
 
 
-        var framedoc = currentIframe.contentDocument;
-        if (!framedoc && currentIframe.contentWindow) {
-            framedoc = currentIframe.contentWindow.document;
-        }
+        // var framedoc = currentIframe.contentDocument;
+        // if (!framedoc && currentIframe.contentWindow) {
+        //     framedoc = currentIframe.contentWindow.document;
+        // }
 
-        framedoc.body.appendChild(j);
+        // framedoc.body.appendChild(j);
       }
 
       
