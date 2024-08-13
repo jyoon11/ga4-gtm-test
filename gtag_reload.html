@@ -26,113 +26,34 @@
     </section>
 
     <script>
-
       var gtagCallCount = 0;
-      var currentDataLayerName = 'dataLayer';
-      var currentGtagName = 'gtag';
-      var currentIframeId;
       var currentIframe;
-
-      function createDataLayerName() {
-        return `dataLayer_${new Date().getTime()}`;
-      }
-
-      function createGtagName() {
-        return `gtag_${new Date().getTime()}`;
-      }
-
-      function createIframeId() {
-        return `iframe_${new Date().getTime()}`;
-      }
 
       function updateGtagCallCountText() {
         document.getElementById('gtagCallCountText').innerText = 'gtagCallCount: ' + gtagCallCount;
       }
 
-      function createIframe(id) {
+      function createGtagIframe() {
         var iframe = document.createElement('iframe');
-        iframe.id = id;
-        // iframe.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
         iframe.src="https://jyoon11.github.io/ga4-gtm-test/empty.html"
         document.body.appendChild(iframe);
 
         currentIframe = iframe;
       }
 
-      function loadGtagManaully(measurementId, customDataLayerName) {
-
-        currentIframeId = createIframeId();
-
-        createIframe(currentIframeId);
-
-        // var s = 'script';
-        // var d = window.document;
-        // var j = d.createElement(s);
-        // var h = d.getElementsByTagName('head')[0];
-        // var i = measurementId;
-        // j.async=true;
-        // j.src='https://www.googletagmanager.com/gtag/js?id='+measurementId;
-        // // h.appendChild(j);
-
-
-        // var framedoc = currentIframe.contentDocument;
-        // if (!framedoc && currentIframe.contentWindow) {
-        //     framedoc = currentIframe.contentWindow.document;
-        // }
-
-        // framedoc.body.appendChild(j);
-      }
-
-      
-      function loadGoogleAnalytics() {
-        var dataLayerName = createDataLayerName();
-        currentGtagName = createGtagName();
-        currentDataLayerName = dataLayerName;
-        loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
-        // window[dataLayerName] = window[dataLayerName] || [];
-        currentIframe.contentWindow[dataLayerName] = currentIframe.contentWindow[dataLayerName] || [];
-
-
-        console.log('currentDataLayerName : ', dataLayerName);
-        console.log('currentGtagName : ', currentGtagName);
-
-        // window[currentGtagName] = function() {
-        //   gtagCallCount++;
-        //   updateGtagCallCountText();
-        //   window[dataLayerName].push(arguments);
-        // };
-        // window[currentGtagName]('js', new Date());
-        // window[currentGtagName]('config', 'G-ZPDGYKBSC6');
-
-        currentIframe.contentWindow[currentGtagName] = function() {
-          gtagCallCount++;
-          updateGtagCallCountText();
-          currentIframe.contentWindow[dataLayerName].push(arguments);
-        };
-        currentIframe.contentWindow[currentGtagName]('js', new Date());
-        currentIframe.contentWindow[currentGtagName]('config', 'G-ZPDGYKBSC6');
-      }
-
-      function overrideGtagInitialization() {
-        var dataLayerName = createDataLayerName();
-        loadGtagManaully('G-ZPDGYKBSC6', dataLayerName);
-        window[dataLayerName] = window[dataLayerName] || [];
-
-        window.gtag = function(...args) {
-          gtagCallCount++;
-          updateGtagCallCountText();
-          window[dataLayerName].push(args);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-ZPDGYKBSC6');
-      }
-
       function fireEvent() {
-        if (gtagCallCount % 7 === 0) {
-          loadGoogleAnalytics();
+        gtagCallCount++;
+        updateGtagCallCountText();
+
+        if (gtagCallCount % 5 === 0) {
+          createGtagIframe();
         }
 
-        callEvent('event', 'sample_one', {gtagCallCount: gtagCallCount});
+        // callEvent('event', 'sample_one', {gtagCallCount: gtagCallCount});
+
+        if (currentIframe.contentWindow && currentIframe.contentWindow.gtag) {
+          currentIframe.contentWindow.gtag('event', 'sample_one', {gtagCallCount: gtagCallCount})
+        } 
       }
 
       function callEvent() {
@@ -142,8 +63,8 @@
         // currentIframe.contentWindow[currentDataLayerName].push(arguments);
         currentIframe.contentWindow.dataLayer.push(arguments);
       }
-      
-      loadGoogleAnalytics();
+
+      createGtagIframe();
 
     </script>
   </body>
